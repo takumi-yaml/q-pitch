@@ -1,19 +1,48 @@
+"use strict";
 import React from 'react';
-import { List01 } from './List01';
-import { Button01 } from './Button01';
+import Button01 from './Button01';
+import { ActionCreater } from "../ActionCreater"
+import { Store } from "../Store"
+import { EventEmitter } from "../EventEmitter"
 
-'use strict';
+const eventEmitter = new EventEmitter();
+const action = new ActionCreater(eventEmitter);
+const store = new Store(eventEmitter);
 
 export class TestMolecures extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {contents: store.getContents()};
+    store.on("CHANGE", () => {
+      this._onChange();
+    });
+    action.changeContents();
+  }
+
+  componentDidMount() {
+    action.changeContents();
+  }
+
+  _onChange() {
+    this.setState({contents: store.getContents()});
+  }
+
+  next(){
+    action.changeContents();
   }
 
   render(){
     return(
         <div>
-          <List01 className={ 'angry' } />
-          <Button01 text={'hello me'} />
+          {this.state.contents.map((content) => {
+            return (
+                <div>
+                  <p>string: { content.string }</p>
+                  <p>flet: { content.flet }</p>
+                </div>
+            );
+          })}
+          <Button01 onClick={ this.next.bind(this) } text={'next'} />
         </div>
     );
   }

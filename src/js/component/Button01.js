@@ -1,14 +1,14 @@
 import React from 'react';
 
 
-export class Button01 extends React.Component {
+export default class Button01 extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render(){
     return(
-        <button>{this.props.text}</button>
+        <button onClick={ this.props.onClick }>{this.props.text}</button>
     );
   }
 }
