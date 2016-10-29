@@ -8,4 +8,9 @@ export class ActionCreater {
   changeContents() {
     this.dispatcher.emit("changeContents");
   }
+
+  answer(data) {
+    console.log(data);
+    this.dispatcher.emit("answer", data);
+  }
 }

@@ -8,9 +8,11 @@ export class Store extends EventEmitter {
     super();
     this.contents = [];
     this.answer = 0;
+    this.result = '';
     this.type = 1;
 
     dispatcher.on("changeContents", this.onChangeContents.bind(this));
+    dispatcher.on("answer", this.onAnswer.bind(this));
   }
 
   getContents() {
@@ -19,6 +21,18 @@ export class Store extends EventEmitter {
 
   getAnswer() {
     return this.answer;
+  }
+
+  getResult() {
+    return this.result;
+  }
+
+  onAnswer(answer){
+    this.result = 'bad!!';
+    if (this.answer == answer){
+      this.result = 'fine!';
+    }
+    this.emit("RESULT");
   }
 
   onChangeContents() {

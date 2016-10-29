@@ -24283,6 +24283,10 @@
 	
 	var _Choices2 = _interopRequireDefault(_Choices);
 	
+	var _Trans = __webpack_require__(/*! ../lib/Trans */ 272);
+	
+	var _Trans2 = _interopRequireDefault(_Trans);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var eventEmitter = new _EventEmitter.EventEmitter();
@@ -24299,8 +24303,14 @@
 	
 	    _this.state = {
 	      contents: store.getContents(),
-	      answer: store.getAnswer()
+	      answer: store.getAnswer(),
+	      result: ''
 	    };
+	
+	    store.on("RESULT", function () {
+	      _this._onAnswer();
+	    });
+	
 	    store.on("CHANGE", function () {
 	      _this._onChange();
 	    });
@@ -24318,15 +24328,22 @@
 	      this.setState({ contents: store.getContents(), answer: store.getAnswer() });
 	    }
 	  }, {
+	    key: '_onAnswer',
+	    value: function _onAnswer() {
+	      this.setState({ result: store.getResult() });
+	    }
+	  }, {
 	    key: 'next',
 	    value: function next() {
+	      this.setState({
+	        result: ''
+	      });
 	      action.changeContents();
 	    }
 	  }, {
 	    key: 'select',
-	    value: function select() {
-	      console.log(0);
-	      // action.select();
+	    value: function select(event) {
+	      action.answer(event.target.value);
 	    }
 	  }, {
 	    key: 'render',
@@ -24362,10 +24379,15 @@
 	          choices.map(function (c, i) {
 	            return _react2.default.createElement(
 	              'li',
-	              { onClick: _this2.select.bind(_this2), key: 'answer' + i.toString() },
-	              c
+	              { onClick: _this2.select.bind(_this2), value: c, key: 'answer' + i.toString() },
+	              (0, _Trans2.default)(c)
 	            );
 	          })
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          this.state.result
 	        ),
 	        _react2.default.createElement(_Button2.default, { onClick: this.next.bind(this), text: 'next' })
 	      );
@@ -24482,6 +24504,12 @@
 	    value: function changeContents() {
 	      this.dispatcher.emit("changeContents");
 	    }
+	  }, {
+	    key: "answer",
+	    value: function answer(data) {
+	      console.log(data);
+	      this.dispatcher.emit("answer", data);
+	    }
 	  }]);
 	  return ActionCreater;
 	}();
@@ -24546,9 +24574,11 @@
 	
 	    _this.contents = [];
 	    _this.answer = 0;
+	    _this.result = '';
 	    _this.type = 1;
 	
 	    dispatcher.on("changeContents", _this.onChangeContents.bind(_this));
+	    dispatcher.on("answer", _this.onAnswer.bind(_this));
 	    return _this;
 	  }
 	
@@ -24561,6 +24591,20 @@
 	    key: "getAnswer",
 	    value: function getAnswer() {
 	      return this.answer;
+	    }
+	  }, {
+	    key: "getResult",
+	    value: function getResult() {
+	      return this.result;
+	    }
+	  }, {
+	    key: "onAnswer",
+	    value: function onAnswer(answer) {
+	      this.result = 'bad!!';
+	      if (this.answer == answer) {
+	        this.result = 'fine!';
+	      }
+	      this.emit("RESULT");
 	    }
 	  }, {
 	    key: "onChangeContents",
@@ -24929,6 +24973,78 @@
 	exports.default = Choices;
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kodkod/products/q_pitch/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "Choices.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 272 */
+/*!*****************************!*\
+  !*** ./src/js/lib/Trans.js ***!
+  \*****************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kodkod/products/q_pitch/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kodkod/products/q_pitch/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	function trans(int) {
+	  var pitch = 'C';
+	  switch (int) {
+	
+	    case 0:
+	      break;
+	
+	    case 1:
+	      pitch = 'C#';
+	      break;
+	
+	    case 2:
+	      pitch = 'D';
+	      break;
+	
+	    case 3:
+	      pitch = 'D#';
+	      break;
+	
+	    case 4:
+	      pitch = 'E';
+	      break;
+	
+	    case 5:
+	      pitch = 'F';
+	      break;
+	
+	    case 6:
+	      pitch = 'F#';
+	      break;
+	
+	    case 7:
+	      pitch = 'G';
+	      break;
+	
+	    case 8:
+	      pitch = 'G#';
+	      break;
+	
+	    case 9:
+	      pitch = 'A';
+	      break;
+	
+	    case 10:
+	      pitch = 'A#';
+	      break;
+	
+	    case 11:
+	      pitch = 'B';
+	      break;
+	  }
+	  return pitch;
+	}
+	
+	exports.default = trans;
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kodkod/products/q_pitch/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "Trans.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ }
 /******/ ]);

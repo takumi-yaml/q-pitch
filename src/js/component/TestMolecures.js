@@ -5,6 +5,7 @@ import { ActionCreater } from "../ActionCreater"
 import { Store } from "../Store"
 import { EventEmitter } from "../EventEmitter"
 import Choices from '../lib/Choices';
+import trans from '../lib/Trans';
 
 const eventEmitter = new EventEmitter();
 const action = new ActionCreater(eventEmitter);
@@ -15,8 +16,14 @@ export class TestMolecures extends React.Component {
     super(props);
     this.state = {
       contents: store.getContents(),
-      answer: store.getAnswer()
+      answer: store.getAnswer(),
+      result: ''
     };
+
+    store.on("RESULT", () => {
+      this._onAnswer();
+    });
+
     store.on("CHANGE", () => {
       this._onChange();
     });
@@ -30,13 +37,19 @@ export class TestMolecures extends React.Component {
     this.setState({contents: store.getContents(), answer: store.getAnswer()});
   }
 
+  _onAnswer() {
+    this.setState({ result: store.getResult() });
+  }
+
   next(){
+    this.setState({
+      result: ''
+    });
     action.changeContents();
   }
 
-  select(){
-    console.log(0);
-    // action.select();
+  select(event){
+    action.answer(event.target.value);
   }
 
   render(){
@@ -55,10 +68,11 @@ export class TestMolecures extends React.Component {
           <ul>
           {choices.map((c, i)=>{
             return (
-                <li onClick={this.select.bind(this)} key={`answer${i.toString()}`}>{c}</li>
+                <li onClick={this.select.bind(this) } value={c} key={`answer${i.toString()}`}>{trans(c)}</li>
             );
           })}
           </ul>
+          <p>{ this.state.result }</p>
           <Button01 onClick={ this.next.bind(this) } text={'next'} />
         </div>
     );
