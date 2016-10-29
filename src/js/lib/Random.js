@@ -4,3 +4,4 @@ export default class Random {
     return Math.floor(now.substr(-8) * Math.random()) % max;
   }
 }
+

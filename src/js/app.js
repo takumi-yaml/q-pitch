@@ -1,10 +1,12 @@
 import React from "react";
 import { render } from "react-dom";
-import Label01 from "./component/Label01.js";
+import { List01 } from "./component/List01";
+import { TestMolecures } from "./component/TestMolecures";
+import { Random } from './lib/Random';
 
 
 render(
-    <Label01 className="cool" text="HELLO, ME" />,
+    <TestMolecures />,
     document.getElementById('main')
 );
 
