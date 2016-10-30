@@ -1,13 +1,13 @@
 "use strict";
 import React from 'react';
-import Button01 from './Button01';
+import ButtonNext from './ButtonNext';
 import { ActionCreater } from "../ActionCreater"
 import { Store } from "../Store"
 import { EventEmitter } from "../EventEmitter"
 import trans from '../lib/Trans';
 
 const eventEmitter = new EventEmitter();
-const action = new ActionCreater(eventEmitter);
+// const action = new ActionCreater(eventEmitter);
 const store = new Store(eventEmitter);
 
 export class TestMolecures extends React.Component {
@@ -34,22 +34,20 @@ export class TestMolecures extends React.Component {
   }
 
   _onChange() {
-    this.setState({contents: store.getContents(), answer: store.getAnswer(), choices: store.getChoices()});
+    this.setState({
+      contents: store.getContents(),
+      answer: store.getAnswer(),
+      choices: store.getChoices(),
+      result: '',
+    });
   }
 
   _onAnswer() {
     this.setState({ result: store.getResult() });
   }
 
-  next(){
-    this.setState({
-      result: ''
-    });
-    action.changeContents();
-  }
-
   select(event){
-    action.answer(event.target.value);
+   // action.answer(event.target.value);
   }
 
   render(){
@@ -63,15 +61,18 @@ export class TestMolecures extends React.Component {
                 </div>
             );
           })}
-          <ul>
+          <ul className={"choices"}>
           {this.state.choices.map((c, i)=>{
             return (
-                <li onClick={this.select.bind(this) } value={c} key={`answer${i.toString()}`}>{trans(c)}</li>
+                <li className={"choices__item"}
+                    onClick={this.select.bind(this) }
+                    value={c}
+                    key={`answer${i.toString()}`}>{trans(c)}</li>
             );
           })}
           </ul>
-          <p>{ this.state.result }</p>
-          <Button01 onClick={ this.next.bind(this) } text={'next'} />
+          <p className={'result'}>{ this.state.result }</p>
+          <ButtonNext action={action} />
         </div>
     );
   }

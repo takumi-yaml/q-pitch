@@ -24269,9 +24269,9 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Button = __webpack_require__(/*! ./Button01 */ 265);
+	var _ButtonNext = __webpack_require__(/*! ./ButtonNext */ 273);
 	
-	var _Button2 = _interopRequireDefault(_Button);
+	var _ButtonNext2 = _interopRequireDefault(_ButtonNext);
 	
 	var _ActionCreater = __webpack_require__(/*! ../ActionCreater */ 266);
 	
@@ -24286,7 +24286,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var eventEmitter = new _EventEmitter.EventEmitter();
-	var action = new _ActionCreater.ActionCreater(eventEmitter);
+	// const action = new ActionCreater(eventEmitter);
 	var store = new _Store.Store(eventEmitter);
 	
 	var TestMolecures = exports.TestMolecures = function (_React$Component) {
@@ -24322,7 +24322,12 @@
 	  }, {
 	    key: '_onChange',
 	    value: function _onChange() {
-	      this.setState({ contents: store.getContents(), answer: store.getAnswer(), choices: store.getChoices() });
+	      this.setState({
+	        contents: store.getContents(),
+	        answer: store.getAnswer(),
+	        choices: store.getChoices(),
+	        result: ''
+	      });
 	    }
 	  }, {
 	    key: '_onAnswer',
@@ -24330,17 +24335,9 @@
 	      this.setState({ result: store.getResult() });
 	    }
 	  }, {
-	    key: 'next',
-	    value: function next() {
-	      this.setState({
-	        result: ''
-	      });
-	      action.changeContents();
-	    }
-	  }, {
 	    key: 'select',
 	    value: function select(event) {
-	      action.answer(event.target.value);
+	      // action.answer(event.target.value);
 	    }
 	  }, {
 	    key: 'render',
@@ -24370,21 +24367,24 @@
 	        }),
 	        _react2.default.createElement(
 	          'ul',
-	          null,
+	          { className: "choices" },
 	          this.state.choices.map(function (c, i) {
 	            return _react2.default.createElement(
 	              'li',
-	              { onClick: _this2.select.bind(_this2), value: c, key: 'answer' + i.toString() },
+	              { className: "choices__item",
+	                onClick: _this2.select.bind(_this2),
+	                value: c,
+	                key: 'answer' + i.toString() },
 	              (0, _Trans2.default)(c)
 	            );
 	          })
 	        ),
 	        _react2.default.createElement(
 	          'p',
-	          null,
+	          { className: 'result' },
 	          this.state.result
 	        ),
-	        _react2.default.createElement(_Button2.default, { onClick: this.next.bind(this), text: 'next' })
+	        _react2.default.createElement(_ButtonNext2.default, { action: action })
 	      );
 	    }
 	  }]);
@@ -24394,73 +24394,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kodkod/products/q_pitch/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "TestMolecures.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 265 */
-/*!**************************************!*\
-  !*** ./src/js/component/Button01.js ***!
-  \**************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kodkod/products/q_pitch/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kodkod/products/q_pitch/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-	
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = undefined;
-	
-	var _getPrototypeOf = __webpack_require__(/*! babel-runtime/core-js/object/get-prototype-of */ 173);
-	
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-	
-	var _classCallCheck2 = __webpack_require__(/*! babel-runtime/helpers/classCallCheck */ 199);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _createClass2 = __webpack_require__(/*! babel-runtime/helpers/createClass */ 200);
-	
-	var _createClass3 = _interopRequireDefault(_createClass2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(/*! babel-runtime/helpers/possibleConstructorReturn */ 204);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(/*! babel-runtime/helpers/inherits */ 251);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Button01 = function (_React$Component) {
-	  (0, _inherits3.default)(Button01, _React$Component);
-	
-	  function Button01(props) {
-	    (0, _classCallCheck3.default)(this, Button01);
-	    return (0, _possibleConstructorReturn3.default)(this, (Button01.__proto__ || (0, _getPrototypeOf2.default)(Button01)).call(this, props));
-	  }
-	
-	  (0, _createClass3.default)(Button01, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'button',
-	        { onClick: this.props.onClick },
-	        this.props.text
-	      );
-	    }
-	  }]);
-	  return Button01;
-	}(_react2.default.Component);
-	
-	exports.default = Button01;
-	
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kodkod/products/q_pitch/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "Button01.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
+/* 265 */,
 /* 266 */
 /*!*********************************!*\
   !*** ./src/js/ActionCreater.js ***!
@@ -25050,6 +24984,88 @@
 	exports.default = trans;
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kodkod/products/q_pitch/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "Trans.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 273 */
+/*!****************************************!*\
+  !*** ./src/js/component/ButtonNext.js ***!
+  \****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kodkod/products/q_pitch/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kodkod/products/q_pitch/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = undefined;
+	
+	var _getPrototypeOf = __webpack_require__(/*! babel-runtime/core-js/object/get-prototype-of */ 173);
+	
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+	
+	var _classCallCheck2 = __webpack_require__(/*! babel-runtime/helpers/classCallCheck */ 199);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(/*! babel-runtime/helpers/createClass */ 200);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _possibleConstructorReturn2 = __webpack_require__(/*! babel-runtime/helpers/possibleConstructorReturn */ 204);
+	
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+	
+	var _inherits2 = __webpack_require__(/*! babel-runtime/helpers/inherits */ 251);
+	
+	var _inherits3 = _interopRequireDefault(_inherits2);
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _ActionCreater = __webpack_require__(/*! ../ActionCreater */ 266);
+	
+	var _EventEmitter = __webpack_require__(/*! ../EventEmitter */ 268);
+	
+	var _Store = __webpack_require__(/*! ../Store */ 267);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var emitter = new _EventEmitter.EventEmitter();
+	var action = new _ActionCreater.ActionCreater(emitter);
+	
+	var ButtonNext = function (_React$Component) {
+	  (0, _inherits3.default)(ButtonNext, _React$Component);
+	
+	  function ButtonNext(props) {
+	    (0, _classCallCheck3.default)(this, ButtonNext);
+	    return (0, _possibleConstructorReturn3.default)(this, (ButtonNext.__proto__ || (0, _getPrototypeOf2.default)(ButtonNext)).call(this, props));
+	  }
+	
+	  (0, _createClass3.default)(ButtonNext, [{
+	    key: 'next',
+	    value: function next() {
+	      action.changeContents();
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'button',
+	        { className: 'button__next',
+	          onClick: this.next.bind(this) },
+	        'next'
+	      );
+	    }
+	  }]);
+	  return ButtonNext;
+	}(_react2.default.Component);
+	
+	exports.default = ButtonNext;
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kodkod/products/q_pitch/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "ButtonNext.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ }
 /******/ ]);
