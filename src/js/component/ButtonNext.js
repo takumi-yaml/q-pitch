@@ -4,7 +4,6 @@ import { EventEmitter } from '../EventEmitter';
 import { Store } from '../Store';
 
 const emitter = new EventEmitter();
-const action = new ActionCreater(emitter);
 
 export default class ButtonNext extends React.Component {
   constructor(props) {
@@ -12,7 +11,7 @@ export default class ButtonNext extends React.Component {
   }
 
   next(){
-    action.changeContents();
+    this.props.action.changeContents();
   }
 
   render(){

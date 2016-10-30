@@ -7,7 +7,7 @@ import { EventEmitter } from "../EventEmitter"
 import trans from '../lib/Trans';
 
 const eventEmitter = new EventEmitter();
-// const action = new ActionCreater(eventEmitter);
+const action = new ActionCreater(eventEmitter);
 const store = new Store(eventEmitter);
 
 export class TestMolecures extends React.Component {
@@ -47,7 +47,7 @@ export class TestMolecures extends React.Component {
   }
 
   select(event){
-   // action.answer(event.target.value);
+   action.answer(event.target.value);
   }
 
   render(){
@@ -55,9 +55,15 @@ export class TestMolecures extends React.Component {
         <div>
           {this.state.contents.map((content, i) => {
             return (
-                <div key={`id${i.toString()}`}>
-                  <p>string: { content.string }</p>
-                  <p>flet: { content.flet }</p>
+                <div className={"question"} key={`id${i.toString()}`}>
+                  <p className={"question__item"}>
+                    <span className={"question__item-sub"}>string:</span>
+                    <span className={"question__item-main"}>{ content.string }</span>
+                  </p>
+                  <p className={"question__item"}>
+                    <span className={"question__item-sub"}>flet:</span>
+                    <span className={"question__item-main"}>{ content.flet }</span>
+                  </p>
                 </div>
             );
           })}
