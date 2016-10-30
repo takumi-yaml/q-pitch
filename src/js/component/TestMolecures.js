@@ -4,7 +4,6 @@ import Button01 from './Button01';
 import { ActionCreater } from "../ActionCreater"
 import { Store } from "../Store"
 import { EventEmitter } from "../EventEmitter"
-import Choices from '../lib/Choices';
 import trans from '../lib/Trans';
 
 const eventEmitter = new EventEmitter();
@@ -17,7 +16,8 @@ export class TestMolecures extends React.Component {
     this.state = {
       contents: store.getContents(),
       answer: store.getAnswer(),
-      result: ''
+      result: '',
+      choices: store.getChoices()
     };
 
     store.on("RESULT", () => {
@@ -34,7 +34,7 @@ export class TestMolecures extends React.Component {
   }
 
   _onChange() {
-    this.setState({contents: store.getContents(), answer: store.getAnswer()});
+    this.setState({contents: store.getContents(), answer: store.getAnswer(), choices: store.getChoices()});
   }
 
   _onAnswer() {
@@ -53,8 +53,6 @@ export class TestMolecures extends React.Component {
   }
 
   render(){
-    const choices = Choices.getChoices(this.state.answer);
-    console.log(choices);
     return(
         <div>
           {this.state.contents.map((content, i) => {
@@ -66,7 +64,7 @@ export class TestMolecures extends React.Component {
             );
           })}
           <ul>
-          {choices.map((c, i)=>{
+          {this.state.choices.map((c, i)=>{
             return (
                 <li onClick={this.select.bind(this) } value={c} key={`answer${i.toString()}`}>{trans(c)}</li>
             );

@@ -10,7 +10,6 @@ export class ActionCreater {
   }
 
   answer(data) {
-    console.log(data);
     this.dispatcher.emit("answer", data);
   }
 }

@@ -2,6 +2,7 @@
 import { EventEmitter } from "./EventEmitter"
 import Random from './lib/Random';
 import Answer from './lib/Answer';
+import Choices from './lib/Choices';
 
 export class Store extends EventEmitter {
   constructor(dispatcher) {
@@ -10,6 +11,7 @@ export class Store extends EventEmitter {
     this.answer = 0;
     this.result = '';
     this.type = 1;
+    this.choices = [];
 
     dispatcher.on("changeContents", this.onChangeContents.bind(this));
     dispatcher.on("answer", this.onAnswer.bind(this));
@@ -21,6 +23,10 @@ export class Store extends EventEmitter {
 
   getAnswer() {
     return this.answer;
+  }
+
+  getChoices() {
+    return this.choices;
   }
 
   getResult() {
@@ -46,6 +52,7 @@ export class Store extends EventEmitter {
       c.push({string: _string, flet: _flet, answer: a});
     }
     this.answer = a;
+    this.choices = Choices.getChoices(this.answer);
     this.contents = c;
     this.emit("CHANGE");
   }

@@ -24279,10 +24279,6 @@
 	
 	var _EventEmitter = __webpack_require__(/*! ../EventEmitter */ 268);
 	
-	var _Choices = __webpack_require__(/*! ../lib/Choices */ 271);
-	
-	var _Choices2 = _interopRequireDefault(_Choices);
-	
 	var _Trans = __webpack_require__(/*! ../lib/Trans */ 272);
 	
 	var _Trans2 = _interopRequireDefault(_Trans);
@@ -24304,7 +24300,8 @@
 	    _this.state = {
 	      contents: store.getContents(),
 	      answer: store.getAnswer(),
-	      result: ''
+	      result: '',
+	      choices: store.getChoices()
 	    };
 	
 	    store.on("RESULT", function () {
@@ -24325,7 +24322,7 @@
 	  }, {
 	    key: '_onChange',
 	    value: function _onChange() {
-	      this.setState({ contents: store.getContents(), answer: store.getAnswer() });
+	      this.setState({ contents: store.getContents(), answer: store.getAnswer(), choices: store.getChoices() });
 	    }
 	  }, {
 	    key: '_onAnswer',
@@ -24350,8 +24347,6 @@
 	    value: function render() {
 	      var _this2 = this;
 	
-	      var choices = _Choices2.default.getChoices(this.state.answer);
-	      console.log(choices);
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -24376,7 +24371,7 @@
 	        _react2.default.createElement(
 	          'ul',
 	          null,
-	          choices.map(function (c, i) {
+	          this.state.choices.map(function (c, i) {
 	            return _react2.default.createElement(
 	              'li',
 	              { onClick: _this2.select.bind(_this2), value: c, key: 'answer' + i.toString() },
@@ -24507,7 +24502,6 @@
 	  }, {
 	    key: "answer",
 	    value: function answer(data) {
-	      console.log(data);
 	      this.dispatcher.emit("answer", data);
 	    }
 	  }]);
@@ -24562,6 +24556,10 @@
 	
 	var _Answer2 = _interopRequireDefault(_Answer);
 	
+	var _Choices = __webpack_require__(/*! ./lib/Choices */ 271);
+	
+	var _Choices2 = _interopRequireDefault(_Choices);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Store = exports.Store = function (_EventEmitter) {
@@ -24576,6 +24574,7 @@
 	    _this.answer = 0;
 	    _this.result = '';
 	    _this.type = 1;
+	    _this.choices = [];
 	
 	    dispatcher.on("changeContents", _this.onChangeContents.bind(_this));
 	    dispatcher.on("answer", _this.onAnswer.bind(_this));
@@ -24591,6 +24590,11 @@
 	    key: "getAnswer",
 	    value: function getAnswer() {
 	      return this.answer;
+	    }
+	  }, {
+	    key: "getChoices",
+	    value: function getChoices() {
+	      return this.choices;
 	    }
 	  }, {
 	    key: "getResult",
@@ -24619,6 +24623,7 @@
 	        c.push({ string: _string, flet: _flet, answer: a });
 	      }
 	      this.answer = a;
+	      this.choices = _Choices2.default.getChoices(this.answer);
 	      this.contents = c;
 	      this.emit("CHANGE");
 	    }
