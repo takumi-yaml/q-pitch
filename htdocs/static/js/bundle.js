@@ -24176,7 +24176,11 @@
 	    key: 'getChoices',
 	    value: function getChoices(answer) {
 	      return Choices.getPattern().map(function (p) {
-	        return answer + p;
+	        var result = answer + p;
+	        if (result < 0) {
+	          result = result + 12;
+	        }
+	        return result % 12;
 	      });
 	    }
 	  }, {

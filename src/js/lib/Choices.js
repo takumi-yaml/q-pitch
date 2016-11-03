@@ -4,7 +4,11 @@ export default class Choices{
 
   static getChoices(answer){
     return Choices.getPattern().map((p)=>{
-      return answer + p;
+      let result = answer + p;
+      if(result < 0) {
+        result = result + 12;
+      }
+      return result % 12;
     })
   }
 
