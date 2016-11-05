@@ -5,14 +5,45 @@ import Question from "./component/Question";
 import Result from "./component/Result";
 import Choices from "./component/Choices";
 
-const onClick = ()=> console.log('success');
+import { Container } from 'flux/utils';
+import QuestionAction from './actions/QuestionAction';
+import QuestionStore from './stores/QuestonStore';
+
+class App extends React.Component {
+  static getStores(){
+    return [QuestionStore];
+  }
+
+  static calculateState(prevState) {
+    return {
+      question: QuestionStore.getState()
+    }
+  }
+
+  onClickChoice(e){
+    QuestionAction.answer(e.target.value)
+  }
+
+  onClickNext(){
+    QuestionAction.reset()
+  }
+
+  render(){
+    return (
+        <div>
+          <Question string={this.state.question.get('string')} flet={this.state.question.get('flet')} />
+          <Result result={this.state.question.get('result')} />
+          <Choices _choices={this.state.question.get('choices')} onClick={this.onClickChoice.bind(this)} />
+          <ButtonNext onClick={this.onClickNext.bind(this)} />
+        </div>
+    )
+  }
+}
+
+const AppContainer = Container.create(App);
+QuestionAction.reset();
 
 render(
-    <div>
-        <Question />
-        <ButtonNext onClick={onClick} />
-        <Choices onClick={onClick} />
-        <Result result={'fine'} />
-    </div>,
+    <AppContainer />,
     document.getElementById('main')
 );
