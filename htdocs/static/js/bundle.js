@@ -24134,7 +24134,6 @@
 	    value: function render() {
 	      var _this2 = this;
 	
-	      console.log(this.props._choices);
 	      return _react2.default.createElement(
 	        'ul',
 	        { className: "choices" },
@@ -25966,6 +25965,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.judge = undefined;
 	
 	var _getPrototypeOf = __webpack_require__(/*! babel-runtime/core-js/object/get-prototype-of */ 1);
 	
@@ -26027,11 +26027,11 @@
 	    key: 'getInitialState',
 	    value: function getInitialState() {
 	      return _immutable2.default.Map({
-	        result: '',
-	        string: 0,
-	        flet: 0,
-	        choices: '',
-	        answer: 0
+	        result: null,
+	        string: null,
+	        flet: null,
+	        choices: null,
+	        answer: null
 	      });
 	    }
 	  }, {
@@ -26055,6 +26055,7 @@
 	
 	var instance = new QuestonStore(_Dispatcher2.default);
 	exports.default = instance;
+	exports.judge = judge;
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kodkod/products/q_pitch/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "QuestonStore.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -31361,7 +31362,6 @@
 	        }
 	        return result % 12;
 	      });
-	      console.log(c);
 	      return c;
 	    }
 	  }, {

@@ -4,7 +4,6 @@ import trans from '../lib/Trans';
 export default class Choices extends React.Component {
 
   render(){
-    console.log(this.props._choices);
     return (
         <ul className={"choices"}>
           {this.props._choices.map((c, i)=>{
