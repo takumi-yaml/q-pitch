@@ -7,6 +7,7 @@
     "build": "webpack",
     "watch": "webpack -d --watch",
     "test": "mocha  ./tests/*.js --require ignore-styles --require ./setup.js --compilers js:babel-register",
+    "jest": "jest",
     "start": "webpack-dev-server --hot",
     "scss": "node-sass --watch --recursive --output htdocs/static/css --output-style compressed src/scss "
   },
@@ -43,6 +44,7 @@
     "flux": "^3.1.0",
     "immutable": "^3.8.1",
     "immutable-js": "^0.3.1-6",
+    "jest": "^16.0.2",
     "mocha": "^3.1.2"
   }
 }
