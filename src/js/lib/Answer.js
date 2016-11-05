@@ -3,9 +3,6 @@ import Random from './Random';
 
 
 export default class Answer {
-  // constructor(type){
-  //   self.type = type;
-  // }
 
   static get_answer(_string, _flet){
     const string = Answer.get_initial(_string);

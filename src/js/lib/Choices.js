@@ -3,13 +3,14 @@ import Random from './Random';
 export default class Choices{
 
   static getChoices(answer){
-    return Choices.getPattern().map((p)=>{
+    const c = Choices.getPattern().map((p)=>{
       let result = answer + p;
       if(result < 0) {
         result = result + 12;
       }
       return result % 12;
     })
+    return c;
   }
 
   static getPattern(){
