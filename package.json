@@ -40,6 +40,9 @@
   },
   "dependencies": {
     "babel-register": "^6.18.0",
+    "flux": "^3.1.0",
+    "immutable": "^3.8.1",
+    "immutable-js": "^0.3.1-6",
     "mocha": "^3.1.2"
   }
 }
