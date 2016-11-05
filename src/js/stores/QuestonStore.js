@@ -11,11 +11,11 @@ const judge = (answer, _answer) => answer === _answer;
 class QuestonStore extends ReduceStore {
   getInitialState(){
     return Immutable.Map({
-      result : '',
-      string: 0,
-      flet: 0,
-      choices: '',
-      answer: 0
+      result : null,
+      string: null,
+      flet: null,
+      choices: null,
+      answer: null
     });
   }
 
@@ -41,3 +41,4 @@ class QuestonStore extends ReduceStore {
 
 const instance = new QuestonStore(Dispatcher);
 export default instance;
+export { judge };
