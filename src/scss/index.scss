@@ -74,3 +74,90 @@ body {
   margin: 0 10px;
   font-size: $fontsize__button;
 }
+
+.figure_wrap {
+  position: relative;
+  padding-top: 30px;
+  width: 74%;
+  margin: 0 auto;
+}
+
+.flet {
+  display: flex;
+
+  &_item {
+    flex: 1 0 auto;
+    border: 2px solid #999;
+    border-right: 0;
+    height: 175px;
+    position: relative;
+    box-sizing: border-box;
+
+    &:last-of-type {
+      flex: 0 1 0;
+      border: 0;
+      border-right: 2px solid #999;
+    }
+
+    &-broad {
+      border-left: 4px solid #999;
+    }
+
+    > span {
+      position: absolute;
+      left: -9px;
+      top: -23px;
+      font-size: 14px;
+    }
+  }
+}
+
+.strings {
+  width: 100%;
+  position: absolute;
+  top: 30px;
+
+  &_item {
+    height: 7px;
+    position: absolute;
+    width: 100%;
+
+    > rect {
+      width: 100%;
+    }
+
+    &:first-of-type {
+      top: 24px;
+    }
+
+    @for $i from 2 through 6 {
+      &:nth-of-type(#{$i}) {
+        top: #{24 * $i}px;
+      }
+    }
+  }
+}
+
+.mark {
+  height: 20px;
+  width: 20px;
+  position: absolute;
+}
+
+
+@for $ii from 1 through 6 {
+  .position_#{$ii}_0 {
+    top: #{24 * $ii + 22}px;
+    left: 42px;
+  }
+
+  .position_#{$ii}_1 {
+    top: #{24 * $ii + 22}px;
+    left: 145px;
+  }
+
+  .position_#{$ii}_2 {
+    top: #{24 * $ii + 22}px;
+    left: 247px;
+  }
+}
