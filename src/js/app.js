@@ -1,12 +1,18 @@
 import React from "react";
 import { render } from "react-dom";
-import { List01 } from "./component/List01";
-import { TestMolecures } from "./component/TestMolecures";
-import { Random } from './lib/Random';
+import ButtonNext from "./component/ButtonNext";
+import Question from "./component/Question";
+import Result from "./component/Result";
+import Choices from "./component/Choices";
 
+const onClick = ()=> console.log('success');
 
 render(
-    <TestMolecures />,
+    <div>
+        <Question />
+        <ButtonNext onClick={onClick} />
+        <Choices onClick={onClick} />
+        <Result result={'fine'} />
+    </div>,
     document.getElementById('main')
 );
-

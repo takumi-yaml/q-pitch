@@ -53,20 +53,6 @@ export class TestMolecures extends React.Component {
   render(){
     return(
         <div>
-          {this.state.contents.map((content, i) => {
-            return (
-                <div className={"question"} key={`id${i.toString()}`}>
-                  <p className={"question__item"}>
-                    <span className={"question__item-sub"}>string:</span>
-                    <span className={"question__item-main"}>{ content.string }</span>
-                  </p>
-                  <p className={"question__item"}>
-                    <span className={"question__item-sub"}>flet:</span>
-                    <span className={"question__item-main"}>{ content.flet }</span>
-                  </p>
-                </div>
-            );
-          })}
           <ul className={"choices"}>
           {this.state.choices.map((c, i)=>{
             return (
@@ -77,8 +63,6 @@ export class TestMolecures extends React.Component {
             );
           })}
           </ul>
-          <p className={'result'}>{ this.state.result }</p>
-          <ButtonNext action={action} />
         </div>
     );
   }
