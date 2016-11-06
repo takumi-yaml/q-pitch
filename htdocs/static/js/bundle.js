@@ -109,6 +109,8 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	var RESULT_FLAG = 0;
+	
 	var App = function (_React$Component) {
 	  (0, _inherits3.default)(App, _React$Component);
 	
@@ -118,6 +120,22 @@
 	  }
 	
 	  (0, _createClass3.default)(App, [{
+	    key: "componentDidUpdate",
+	    value: function componentDidUpdate(props, state) {
+	      if (this.state.question.get('result').text && !RESULT_FLAG) {
+	        this.reset_result();
+	        RESULT_FLAG = 1;
+	      }
+	    }
+	  }, {
+	    key: "reset_result",
+	    value: function reset_result() {
+	      setTimeout(function () {
+	        _QuestionAction2.default.reset_result();
+	        RESULT_FLAG = 0;
+	      }, 800);
+	    }
+	  }, {
 	    key: "onClickChoice",
 	    value: function onClickChoice(e) {
 	      _QuestionAction2.default.answer(e.target.value);
@@ -134,7 +152,11 @@
 	        "div",
 	        null,
 	        _react2.default.createElement(_Figure2.default, { string: this.state.question.get('string'), flet: this.state.question.get('flet') }),
-	        _react2.default.createElement(_Result2.default, { result: this.state.question.get('result') }),
+	        _react2.default.createElement(
+	          _Result2.default,
+	          { className: this.state.question.get('result').className },
+	          this.state.question.get('result').text
+	        ),
 	        _react2.default.createElement(_Choices2.default, { _choices: this.state.question.get('choices'), onClick: this.onClickChoice.bind(this) }),
 	        _react2.default.createElement(_ButtonNext2.default, { onClick: this.onClickNext.bind(this) })
 	      );
@@ -24006,11 +24028,15 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kodkod/products/q_pitch/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kodkod/products/q_pitch/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	
+	var _extends2 = __webpack_require__(/*! babel-runtime/helpers/extends */ 265);
+	
+	var _extends3 = _interopRequireDefault(_extends2);
 	
 	var _react = __webpack_require__(/*! react */ 87);
 	
@@ -24019,11 +24045,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Result = function Result(props) {
-	  return _react2.default.createElement(
-	    'p',
-	    null,
-	    props.result
-	  );
+	  return _react2.default.createElement("p", (0, _extends3.default)({ id: "resultMsg" }, props));
 	};
 	
 	exports.default = Result;
@@ -25970,6 +25992,13 @@
 	      });
 	    }
 	  }, {
+	    key: 'reset_result',
+	    value: function reset_result() {
+	      _Dispatcher2.default.dispatch({
+	        type: _ActionType2.default.RESET_RESULT
+	      });
+	    }
+	  }, {
 	    key: 'reset',
 	    value: function reset() {
 	      _Dispatcher2.default.dispatch({
@@ -26290,6 +26319,7 @@
 	
 	var ActionType = {
 	  RESET: (0, _symbol2.default)('reset'),
+	  RESET_RESULT: (0, _symbol2.default)('reset_result'),
 	  ANSWER: (0, _symbol2.default)('answer')
 	};
 	
@@ -26387,9 +26417,11 @@
 	        case _ActionType2.default.RESET:
 	          var q = _QuestionCreater2.default.create();
 	          var c = _Choices2.default.getChoices(q.answer);
-	          return state.set('string', q.string).set('flet', q.flet).set('answer', q.answer).set('choices', _immutable2.default.List(c)).set('result', '');
+	          return state.set('string', q.string).set('flet', q.flet).set('answer', q.answer).set('choices', _immutable2.default.List(c)).set('result', { className: 'result', text: '' });
+	        case _ActionType2.default.RESET_RESULT:
+	          return state.set('result', { className: 'result', text: '' });
 	        case _ActionType2.default.ANSWER:
-	          var myJudge = judge(action.value, state.get('answer')) ? 'GOOD' : 'BAD';
+	          var myJudge = judge(action.value, state.get('answer')) ? { className: 'result good', text: 'GOOD' } : { className: 'result bad', text: 'BAD' };
 	          return state.set('result', myJudge);
 	        default:
 	          return state;
