@@ -32,11 +32,10 @@ class App extends React.Component {
   render(){
     return (
         <div>
-          <Question string={this.state.question.get('string')} flet={this.state.question.get('flet')} />
+          <Figure string={this.state.question.get('string')} flet={this.state.question.get('flet')} />
           <Result result={this.state.question.get('result')} />
           <Choices _choices={this.state.question.get('choices')} onClick={this.onClickChoice.bind(this)} />
           <ButtonNext onClick={this.onClickNext.bind(this)} />
-          <Figure string={this.state.question.get('string')} flet={this.state.question.get('flet')} />
         </div>
     )
   }

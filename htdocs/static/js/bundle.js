@@ -133,11 +133,10 @@
 	      return _react2.default.createElement(
 	        "div",
 	        null,
-	        _react2.default.createElement(_Question2.default, { string: this.state.question.get('string'), flet: this.state.question.get('flet') }),
+	        _react2.default.createElement(_Figure2.default, { string: this.state.question.get('string'), flet: this.state.question.get('flet') }),
 	        _react2.default.createElement(_Result2.default, { result: this.state.question.get('result') }),
 	        _react2.default.createElement(_Choices2.default, { _choices: this.state.question.get('choices'), onClick: this.onClickChoice.bind(this) }),
-	        _react2.default.createElement(_ButtonNext2.default, { onClick: this.onClickNext.bind(this) }),
-	        _react2.default.createElement(_Figure2.default, { string: this.state.question.get('string'), flet: this.state.question.get('flet') })
+	        _react2.default.createElement(_ButtonNext2.default, { onClick: this.onClickNext.bind(this) })
 	      );
 	    }
 	  }], [{
