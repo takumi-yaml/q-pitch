@@ -88,27 +88,37 @@ body {
   &_item {
     flex: 1 0 auto;
     border: 2px solid #999;
-    border-right: 0;
-    height: 175px;
+    border-left: 0;
+    height: 160px;
     position: relative;
     box-sizing: border-box;
 
-    &:last-of-type {
+    > span {
+      position: absolute;
+      right: -9px;
+      top: -23px;
+      font-size: 14px;
+    }
+
+    &:first-of-type {
       flex: 0 1 0;
       border: 0;
-      border-right: 2px solid #999;
+      border-left: 2px solid #999;
+
+      > span {
+        right: -6px;
+        top: -20px;
+      }
     }
 
     &-broad {
       border-left: 4px solid #999;
+
+      > span {
+        display: none;
+      }
     }
 
-    > span {
-      position: absolute;
-      left: -9px;
-      top: -23px;
-      font-size: 14px;
-    }
   }
 }
 
@@ -127,12 +137,12 @@ body {
     }
 
     &:first-of-type {
-      top: 24px;
+      top: 22px;
     }
 
     @for $i from 2 through 6 {
       &:nth-of-type(#{$i}) {
-        top: #{24 * $i}px;
+        top: #{22 * $i}px;
       }
     }
   }
@@ -147,17 +157,21 @@ body {
 
 @for $ii from 1 through 6 {
   .position_#{$ii}_0 {
-    top: #{24 * $ii + 22}px;
-    left: 42px;
+    display: none;
   }
 
   .position_#{$ii}_1 {
-    top: #{24 * $ii + 22}px;
-    left: 145px;
+    top: #{22 * $ii + 21}px;
+    left: 42px;
   }
 
   .position_#{$ii}_2 {
-    top: #{24 * $ii + 22}px;
+    top: #{22 * $ii + 21}px;
+    left: 145px;
+  }
+
+  .position_#{$ii}_3 {
+    top: #{22 * $ii + 21}px;
     left: 247px;
   }
 }

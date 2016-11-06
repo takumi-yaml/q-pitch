@@ -36,7 +36,7 @@ export default class Figure extends React.Component {
           {
             this.state.flets.map((e, i)=> {
               let _className = 'flet_item';
-              if (e === 0) _className = 'flet_item-broad';
+              if (e === 0) _className = 'flet_item flet_item-broad';
               return (
                   <div key={`flet${i.toString()}`} className={_className}>
                     <span>{e}</span>

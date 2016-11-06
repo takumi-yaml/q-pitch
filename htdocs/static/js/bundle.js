@@ -24282,7 +24282,7 @@
 	          { className: 'flet' },
 	          this.state.flets.map(function (e, i) {
 	            var _className = 'flet_item';
-	            if (e === 0) _className = 'flet_item-broad';
+	            if (e === 0) _className = 'flet_item flet_item-broad';
 	            return _react2.default.createElement(
 	              'div',
 	              { key: 'flet' + i.toString(), className: _className },
@@ -24511,10 +24511,12 @@
 	
 	var fletOrder = function fletOrder(length, pertinent) {
 	  var position = null;
-	  if (length - 1 >= pertinent) {
-	    position = _Random2.default.random(pertinent);
+	  if (pertinent == 0) {
+	    position = 0;
+	  } else if (length >= pertinent) {
+	    position = _Random2.default.random(pertinent) + 1;
 	  } else {
-	    position = _Random2.default.random(length - 1);
+	    position = _Random2.default.random(length - 1) + 1;
 	  }
 	  var list = [];
 	  for (var i = 0, l = length; i < l; i++) {
