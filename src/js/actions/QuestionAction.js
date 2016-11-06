@@ -9,6 +9,12 @@ export default class QuestionAction {
     })
   }
 
+  static reset_result(){
+    Dispatcher.dispatch({
+      type: ActionType.RESET_RESULT
+    })
+  }
+
   static reset(){
     Dispatcher.dispatch({
       type: ActionType.RESET,
