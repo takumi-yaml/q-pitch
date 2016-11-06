@@ -1,8 +1,7 @@
 import React from 'react';
 
 const Result = (props) =>{
-  return <p>{props.result}</p>;
+  return <p id="resultMsg" {...props} />;
 };
-
 
 export default Result;

@@ -28,10 +28,12 @@ class QuestonStore extends ReduceStore {
             .set('flet', q.flet)
             .set('answer', q.answer)
             .set('choices', Immutable.List(c))
-            .set('result', '');
+            .set('result', {className: 'result', text: ''});
+      case ActionType.RESET_RESULT:
+        return state.set('result', {className: 'result', text: ''});
       case ActionType.ANSWER:
         const myJudge = (judge(action.value, state.get('answer')))
-            ? 'GOOD' : 'BAD';
+            ? {className: 'result good', text: 'GOOD'} : {className: 'result bad', text: 'BAD'};
         return state.set('result', myJudge);
       default:
         return state;

@@ -1,5 +1,6 @@
 $fontsize__sub: 14px;
 $fontsize__button: 18px;
+$fontsize__result: 100px;
 $fontsize__main: 80px;
 $fontsize__choice: 30px;
 $black: #000;
@@ -12,6 +13,7 @@ body {
 
 .wrapper {
   width: 100%;
+  position: relative;
 }
 
 .question {
@@ -71,6 +73,128 @@ body {
 
 .result {
   text-align: center;
-  margin: 0 10px;
-  font-size: $fontsize__button;
+  width: 100%;
+  margin: 0;
+  font-size: $fontsize__result;
+  position: absolute;
+  top: 50px;
+  opacity: .6;
+  font-weight: 700;
+  line-height: 1.1;
+
+  &.good {
+    color: #34d24e;
+    background: #81e691;
+    opacity: 0;
+    transition: opacity .6s;
+  }
+
+  &.bad {
+    color: #db0000;
+    background: #e67168;
+    opacity: 0;
+    transition: opacity .6s;
+  }
+
+}
+
+.figure_wrap {
+  position: relative;
+  padding-top: 30px;
+  width: 74%;
+  margin: 0 auto;
+}
+
+.flet {
+  display: flex;
+
+  &_item {
+    flex: 1 0 auto;
+    border: 2px solid #999;
+    border-left: 0;
+    height: 160px;
+    position: relative;
+    box-sizing: border-box;
+
+    > span {
+      position: absolute;
+      right: -9px;
+      top: -23px;
+      font-size: 14px;
+    }
+
+    &:first-of-type {
+      flex: 0 1 0;
+      border: 0;
+      border-left: 2px solid #999;
+
+      > span {
+        right: -6px;
+        top: -20px;
+      }
+    }
+
+    &-broad {
+      border-left: 4px solid #999;
+
+      > span {
+        display: none;
+      }
+    }
+
+  }
+}
+
+.strings {
+  width: 100%;
+  position: absolute;
+  top: 30px;
+
+  &_item {
+    height: 7px;
+    position: absolute;
+    width: 100%;
+
+    > rect {
+      width: 100%;
+    }
+
+    &:first-of-type {
+      top: 22px;
+    }
+
+    @for $i from 2 through 6 {
+      &:nth-of-type(#{$i}) {
+        top: #{22 * $i}px;
+      }
+    }
+  }
+}
+
+.mark {
+  height: 20px;
+  width: 20px;
+  position: absolute;
+}
+
+
+@for $ii from 1 through 6 {
+  .position_#{$ii}_0 {
+    display: none;
+  }
+
+  .position_#{$ii}_1 {
+    top: #{22 * $ii + 21}px;
+    left: 14%;
+  }
+
+  .position_#{$ii}_2 {
+    top: #{22 * $ii + 21}px;
+    left: 48%;
+  }
+
+  .position_#{$ii}_3 {
+    top: #{22 * $ii + 21}px;
+    left: 80.5%;
+  }
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import Random from '../lib/Random'
 
 export default class List01 extends React.Component {
   constructor(props) {
