@@ -20,11 +20,13 @@ export default class Figure extends React.Component {
     this.setState({position: _position});
   }
 
-  componentWillReceiveProps(props) {
-    const _flets = fletOrder(4, props.flet);
-    const _position = _flets.indexOf(props.flet);
-    this.setState({flets: _flets});
-    this.setState({position: _position});
+  componentWillReceiveProps(nextProps){
+    if (nextProps.string !== this.props.string || nextProps.flet !== this.props.flet) {
+      const _flets = fletOrder(4, nextProps.flet);
+      const _position = _flets.indexOf(nextProps.flet);
+      this.setState({flets: _flets});
+      this.setState({position: _position});
+    }
   }
 
   render(){

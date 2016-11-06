@@ -24261,11 +24261,13 @@
 	    }
 	  }, {
 	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps(props) {
-	      var _flets = (0, _FletOrder2.default)(4, props.flet);
-	      var _position = _flets.indexOf(props.flet);
-	      this.setState({ flets: _flets });
-	      this.setState({ position: _position });
+	    value: function componentWillReceiveProps(nextProps) {
+	      if (nextProps.string !== this.props.string || nextProps.flet !== this.props.flet) {
+	        var _flets = (0, _FletOrder2.default)(4, nextProps.flet);
+	        var _position = _flets.indexOf(nextProps.flet);
+	        this.setState({ flets: _flets });
+	        this.setState({ position: _position });
+	      }
 	    }
 	  }, {
 	    key: 'render',
